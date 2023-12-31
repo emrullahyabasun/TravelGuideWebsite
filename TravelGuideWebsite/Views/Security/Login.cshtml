@@ -1,0 +1,30 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_LoginorCreate.cshtml";
+}
+
+<div class="container-md">
+    <div class="row justify-content-center" style="margin-top:20%" >
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Giriş Yap
+                    </h3>
+                    <div class="card-body">
+                        <form method="post">
+                            <label for="Email">Email</label>
+                            <input type="email" class="form-control" placeholder="Email" name="Email" id="Email" />
+                            <label for="Parola">Parola</label>
+                            <input type="password" class="form-control" placeholder="Parola" name="Password" id="Password" />
+                            <input type="submit" class="btn btn-dark mt-3 form-control" value="Login" />
+                        </form>
+                        <label class="text-danger mt-3">@ViewData["Message"]</label>
+                        <p class="mt-2">Kullanıcı hesabınız yok mu? </p><strong> @Html.ActionLink("Kayıt Ol!", "Create", "Users") </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

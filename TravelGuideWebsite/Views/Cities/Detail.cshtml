@@ -1,0 +1,37 @@
+﻿@using TravelGuideWebsite.Models;
+@model IEnumerable<TravelGuideWebsite.Models.BlogPost>
+
+@{
+    ViewBag.Title = ViewBag.CityName + " Blogları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-md">
+    <h2>@ViewBag.CityName</h2>
+
+    @if (!Model.Any())
+    {
+        <h1>Henüz bu şehire ait blog yoktur.</h1>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var post in Model)
+                {
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="@Url.Content(post.Image)" class="card-img-top" alt="@post.Title">
+                            <div class="card-body">
+                                <h5 class="card-title">@post.Title</h5>
+                                <p class="card-text">@post.Content</p>
+                                <a href="@Url.Action("PostDetail", "Blog", new { id = post.Id })" class="btn btn-primary">Devamını Oku</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
