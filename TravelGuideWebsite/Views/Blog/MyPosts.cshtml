@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TravelGuideWebsite.Models.BlogPost>
+
+@{
+    ViewBag.Title = "My Blog Posts";
+}
+
+<h2>Yazdığım Bloglar</h2>
+
+<table class="table">
+    <tr>
+        <th>Bloglar</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var post in Model)
+    {
+        <tr>
+            <td>@post.Title</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = post.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+</table>

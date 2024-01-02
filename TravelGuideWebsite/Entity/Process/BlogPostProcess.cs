@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using TravelGuideWebsite.Entity.Interface;
 using TravelGuideWebsite.Models;
+using System.Data.Entity;
 
 namespace TravelGuideWebsite.Entity.Process
 {
@@ -17,8 +18,7 @@ namespace TravelGuideWebsite.Entity.Process
             {
                 var post = db.BlogPosts.FirstOrDefault(x => x.Title == entity.Title);
                 if (post == null &&
-                !String.IsNullOrWhiteSpace(entity.Content) &&
-                !String.IsNullOrWhiteSpace(entity.Image))
+                !String.IsNullOrWhiteSpace(entity.Content))
                 {
                     db.BlogPosts.Add(entity);
                     db.SaveChanges();
@@ -54,7 +54,9 @@ namespace TravelGuideWebsite.Entity.Process
 
         public BlogPost Get(int id)
         {
-            var post = db.BlogPosts.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
+            var post = db.BlogPosts
+                 .Include(p => p.User)
+                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);
             return post;
         }
 

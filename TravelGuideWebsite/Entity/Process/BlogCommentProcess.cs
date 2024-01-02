@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TravelGuideWebsite.Models;
+using System.Data.Entity;
 
 namespace TravelGuideWebsite.Entity.Process
 {
@@ -26,7 +27,7 @@ namespace TravelGuideWebsite.Entity.Process
 
         public List<BlogComment> Get(int id)
         {
-            var comment = db.BlogComments.Where(x => x.BlogPostId == id && !x.IsDeleted).ToList();
+            var comment = db.BlogComments.Where(x => x.BlogPostId == id && !x.IsDeleted).Include(x => x.User).ToList();
             return comment;
         }
 

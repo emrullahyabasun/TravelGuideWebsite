@@ -11,41 +11,31 @@ namespace TravelGuideWebsite.Entity.Process
     {
 
         DataContext db = new DataContext();
-        public string Add(BlogLike entity)
+        public string Add(int blogPostId, int userId)
         {
 
-            var like = db.BlogLikes.FirstOrDefault(x => x.BlogPostId == entity.BlogPostId && x.UserId == entity.UserId);
-            if (like == null)
+            var existingLike = db.BlogLikes.FirstOrDefault(x => x.BlogPostId == blogPostId && x.UserId == userId);
+            if (existingLike == null)
             {
-                db.BlogLikes.Add(entity);
-
+                
+                db.BlogLikes.Add(new BlogLike { BlogPostId = blogPostId, UserId = userId });
+                db.SaveChanges();
+                return "Beğenildi";
             }
             else
             {
-                db.BlogLikes.Remove(like);
-
+                
+                existingLike.IsDeleted = !existingLike.IsDeleted;
+                db.SaveChanges();
+                return existingLike.IsDeleted ? "Beğeni kaldırıldı" : "Beğenildi";
             }
-            db.SaveChanges();
-            return "Like işlemi başarılı";
         }
 
-        public int LikeCount(int id)
+        public int LikeCount(int blogPostId)
         {
-            var like = db.BlogLikes.Where(x => x.BlogPostId == id).Count();
-            return like;
+            return db.BlogLikes.Count(x => x.BlogPostId == blogPostId && !x.IsDeleted);
         }
 
-        public bool IsLiked(int id, int userId)
-        {
-            var like = db.BlogLikes.FirstOrDefault(x => x.BlogPostId == id && x.UserId == userId);
-            if (like == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        
     }
 }

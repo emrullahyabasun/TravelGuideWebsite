@@ -52,11 +52,15 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="index.html">Bloglar</a></li>
-                    <li><a href="@Url.Action("Logout", "Security")">Blog Yaz !</a></li>
+                    <li><a href="@Url.Action("Index", "Blog")">Bloglar</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Create", "Blog")">Blog Yaz !</a></li>
+                        <li><a href="@Url.Action("MyPosts", "Blog")">Bloglarım</a></li>
+                    }
                     <li><a href="@Url.Action("Index", "Cities")">Şehirler</a></li>
-                    <li><a href="@Url.Action("Logout", "Security")">Hakkımızda</a></li>
-                    <li><a href="@Url.Action("Logout", "Security")">İletişim</a></li>
+                    <li><a href="@Url.Action("About", "Home")">Hakkımızda</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">İletişim</a></li>
                 </ul>
             </nav><!-- .navbar -->
 
@@ -114,11 +118,11 @@
                     </div>
                     <div class="col-md-12 navbar">
                         <ul class="footer-links list-unstyled ">
-                            <li><a href="@Url.Action("Index", "Home")l"><i class="bi bi-chevron-right"></i>Anasayfa</a></li>
-                            <li><a href="index.html"><i class="bi bi-chevron-right"></i>Bloglar</a></li>
-                            <li><a href="index.html"><i class="bi bi-chevron-right"></i>Şehirler</a></li>
-                            <li><a href="about.html"><i class="bi bi-chevron-right"></i>Hakkımızda</a></li>
-                            <li><a href="contact.html"><i class="bi bi-chevron-right"></i>İletişim</a></li>
+                            <li><a href="@Url.Action("Index", "Home")"><i class="bi bi-chevron-right"></i>Anasayfa</a></li>
+                            <li><a href="@Url.Action("Index", "Blog")"><i class="bi bi-chevron-right"></i>Bloglar</a></li>
+                            <li><a href="@Url.Action("Index", "Cities")"><i class="bi bi-chevron-right"></i>Şehirler</a></li>
+                            <li><a href="@Url.Action("About", "Home")"><i class="bi bi-chevron-right"></i>Hakkımızda</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")"><i class="bi bi-chevron-right"></i>İletişim</a></li>
                         </ul>
                     </div>
 

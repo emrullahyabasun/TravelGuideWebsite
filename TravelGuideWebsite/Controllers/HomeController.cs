@@ -27,8 +27,20 @@ namespace TravelGuideWebsite.Controllers
             {
                 ViewBag.User = null;
             }
+
+            var recentPosts = db.BlogPosts.OrderByDescending(p => p.CreationDate).Take(5).ToList();
+            var popularPosts = db.BlogPosts.OrderByDescending(p => p.Likes.Count).Take(5).ToList();
+            ViewBag.RecentPosts = recentPosts;
+            ViewBag.PopularPosts = popularPosts;
+
             return View();
         }
+
+
+       
+
+
+
         [AllowAnonymous]
         public ActionResult About()
         {

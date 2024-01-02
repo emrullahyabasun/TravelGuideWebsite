@@ -59,7 +59,7 @@ namespace TravelGuideWebsite.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Security");
             }
 
             ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", user.RoleId);
